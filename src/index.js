@@ -102,7 +102,7 @@ export default class RNPickerSelect extends PureComponent {
         let validValue;
         if (value && Array.isArray(items)) {
             validValue = items.some((el) => {
-                return el.value === value;
+                return el.value === value.value;
             });
         }
         if (isEqual(placeholder, {}) || validValue) {
