@@ -98,8 +98,14 @@ export default class RNPickerSelect extends PureComponent {
         InputAccessoryView: null,
     };
 
-    static handlePlaceholder({ placeholder }) {
-        if (isEqual(placeholder, {})) {
+    static handlePlaceholder({ placeholder, value, items }) {
+        let validValue;
+        if (value && Array.isArray(items)) {
+            validValue = items.some((el) => {
+                return el.value === value;
+            });
+        }
+        if (isEqual(placeholder, {}) || validValue) {
             return [];
         }
         return [placeholder];
@@ -125,6 +131,8 @@ export default class RNPickerSelect extends PureComponent {
         // update items if items or placeholder prop changes
         const items = RNPickerSelect.handlePlaceholder({
             placeholder: nextProps.placeholder,
+            value: nextProps.value,
+            items: nextProps.items,
         }).concat(nextProps.items);
         const itemsChanged = !isEqual(prevState.items, items);
 
@@ -156,6 +164,8 @@ export default class RNPickerSelect extends PureComponent {
 
         const items = RNPickerSelect.handlePlaceholder({
             placeholder: props.placeholder,
+            value: props.value,
+            items: props.items,
         }).concat(props.items);
 
         const { selectedItem } = RNPickerSelect.getSelectedItem({

@@ -459,7 +459,8 @@ describe('RNPickerSelect', () => {
                 items: selectItems,
             };
             const prevState = {
-                items: [placeholder].concat(selectItems),
+                placeholder,
+                items: selectItems,
                 selectedItem: selectItems[0],
             };
 
@@ -479,23 +480,48 @@ describe('RNPickerSelect', () => {
             };
 
             expect(RNPickerSelect.getDerivedStateFromProps(nextProps, prevState)).toEqual({
-                items: [placeholder].concat(selectItems).concat([violet]),
+                items: [].concat(selectItems).concat([violet]),
             });
         });
 
-        it('should return a new items state when the placeholder changes', () => {
+        // it.only('should return same items state when the placeholder changes and any value is selected', () => {
+        //     const newPlaceholder = {
+        //         label: 'Select a thing...',
+        //         value: null,
+        //     };
+        //     const nextProps = {
+        //         placeholder: newPlaceholder,
+        //         value: selectItems[1].value,
+        //         onValueChange() {},
+        //         items: selectItems,
+        //         // selectedItem: selectItems[1],
+        //     };
+        //     const prevState = {
+        //         items: selectItems,
+        //         placeholder,
+        //         // value: selectItems[1].value,
+        //         selectedItem: selectItems[1],
+        //     };
+
+        //     expect(RNPickerSelect.getDerivedStateFromProps(nextProps, prevState)).toEqual({
+        //         items: [].concat(selectItems),
+        //     });
+        // });
+
+        it('should return same items state when the placeholder changes and value is not selected', () => {
             const newPlaceholder = {
                 label: 'Select a thing...',
                 value: null,
             };
             const nextProps = {
                 placeholder: newPlaceholder,
-                value: selectItems[0].value,
+                selectedItem: selectItems[0],
                 onValueChange() {},
                 items: selectItems,
             };
             const prevState = {
-                items: [placeholder].concat(selectItems),
+                items: selectItems,
+                placeholder,
                 selectedItem: selectItems[0],
             };
 
@@ -512,7 +538,8 @@ describe('RNPickerSelect', () => {
                 items: selectItems,
             };
             const prevState = {
-                items: [placeholder].concat(selectItems),
+                items: selectItems,
+                placeholder,
                 selectedItem: selectItems[0],
             };
 
