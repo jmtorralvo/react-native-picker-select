@@ -467,7 +467,7 @@ describe('RNPickerSelect', () => {
             expect(RNPickerSelect.getDerivedStateFromProps(nextProps, prevState)).toEqual(null);
         });
 
-        it.skip('should return a new items state when the items change', () => {
+        it('should return a new items state when the items change', () => {
             const nextProps = {
                 placeholder,
                 value: selectItems[0].value,
@@ -484,29 +484,29 @@ describe('RNPickerSelect', () => {
             });
         });
 
-        // it.only('should return same items state when the placeholder changes and any value is selected', () => {
-        //     const newPlaceholder = {
-        //         label: 'Select a thing...',
-        //         value: null,
-        //     };
-        //     const nextProps = {
-        //         placeholder: newPlaceholder,
-        //         value: selectItems[1].value,
-        //         onValueChange() {},
-        //         items: selectItems,
-        //         // selectedItem: selectItems[1],
-        //     };
-        //     const prevState = {
-        //         items: selectItems,
-        //         placeholder,
-        //         // value: selectItems[1].value,
-        //         selectedItem: selectItems[1],
-        //     };
+        it('should return same items state when the placeholder changes and any value is selected', () => {
+            const newPlaceholder = {
+                label: 'Select a thing...',
+                value: null,
+            };
+            const nextProps = {
+                placeholder: newPlaceholder,
+                value: selectItems[1].value,
+                onValueChange() {},
+                items: selectItems,
+                // selectedItem: selectItems[1],
+            };
+            const prevState = {
+                items: selectItems,
+                placeholder,
+                // value: selectItems[1].value,
+                selectedItem: selectItems[1],
+            };
 
-        //     expect(RNPickerSelect.getDerivedStateFromProps(nextProps, prevState)).toEqual({
-        //         items: [].concat(selectItems),
-        //     });
-        // });
+            expect(RNPickerSelect.getDerivedStateFromProps(nextProps, prevState)).toEqual({
+                items: [].concat(selectItems),
+            });
+        });
 
         it('should return same items state when the placeholder changes and value is not selected', () => {
             const newPlaceholder = {
@@ -530,7 +530,7 @@ describe('RNPickerSelect', () => {
             });
         });
 
-        it.skip('should return a new selectedItem state when the value changes', () => {
+        it('should return a new selectedItem state when the value changes', () => {
             const nextProps = {
                 placeholder,
                 value: selectItems[1].value,

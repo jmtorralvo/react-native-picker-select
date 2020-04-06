@@ -101,9 +101,11 @@ export default class RNPickerSelect extends PureComponent {
     static handlePlaceholder({ placeholder, value, items }) {
         let validValue;
         if (value && Array.isArray(items)) {
-            validValue = items.some((el) => {
-                return el.value === value.value;
-            });
+            validValue = Boolean(
+                items.filter((el) => {
+                    return el.value === value.value;
+                }).length
+            );
         }
         if (isEqual(placeholder, {}) || validValue) {
             return [];
